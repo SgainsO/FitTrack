@@ -1,4 +1,4 @@
-package com.zybooks.myapplication.ui.home;
+package com.zybooks.myapplication.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +36,6 @@ public class CustomAdapater extends RecyclerView.Adapter<CustomAdapater.ViewHold
         {
             return weight_textView;
         }
-
         public TextView getReps()
         {
             return rep_textView;
@@ -67,8 +66,8 @@ public class CustomAdapater extends RecyclerView.Adapter<CustomAdapater.ViewHold
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getType().setText(type_array[position]);
-        viewHolder.getType().setText(weight_array[position]);
-        viewHolder.getType().setText(reps_array[position]);
+        viewHolder.getWeight().setText(weight_array[position]);
+        viewHolder.getReps().setText(reps_array[position]);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

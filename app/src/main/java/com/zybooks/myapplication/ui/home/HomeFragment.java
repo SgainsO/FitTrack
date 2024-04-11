@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.myapplication.R;
 import com.zybooks.myapplication.databinding.FragmentHomeBinding;
+import com.zybooks.myapplication.ui.CustomAdapater;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -27,20 +27,14 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        recyclerView = root.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
+        final TextView welcomeText = binding.welcome;
+        homeViewModel.welcomeGetText().observe(getViewLifecycleOwner(), welcomeText::setText);
 
-        String[] testType = {"Bicep Curls", "Tricep Curls"};
-        String[] testPounds = {"10 Pounds", "100 Pounds"};
-        String[] testReps = {"10 Reps", "100 Reps"};
+        final TextView progressText = binding.progress;
+        homeViewModel.progressGetText().observe(getViewLifecycleOwner(), progressText::setText);
 
-        CustomAdapater adapter = new CustomAdapater(testType, testPounds, testReps);
-        recyclerView.setAdapter(adapter);
         return root;
-
     }
 
     @Override

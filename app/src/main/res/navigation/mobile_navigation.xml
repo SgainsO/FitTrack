@@ -12,14 +12,15 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.zybooks.myapplication.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_lifts"
+        android:name="com.zybooks.myapplication.ui.lifts.LiftsFragment"
+        android:label="@string/title_lifts"
+        tools:layout="@layout/fragment_lifts" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.zybooks.myapplication.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_weight"
+        android:name="com.zybooks.myapplication.ui.weight.WeightFragment"
+        android:label="@string/title_weight"
+        tools:layout="@layout/fragment_weight" />
+
 </navigation>

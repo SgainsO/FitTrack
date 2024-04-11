@@ -1,4 +1,4 @@
-package com.zybooks.myapplication.ui.home;
+package com.zybooks.myapplication.ui.lifts;
 
 public class LiftWidget {
     public String name;
