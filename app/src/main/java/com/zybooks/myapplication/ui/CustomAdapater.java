@@ -5,15 +5,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.myapplication.R;
+import com.zybooks.myapplication.ui.lifts.LiftWidget;
 
-public class CustomAdapater extends RecyclerView.Adapter<CustomAdapater.ViewHolder> {
+import java.util.List;
 
-    private final String [] type_array;
-    private final String [] weight_array;
-    private final String [] reps_array;
+public class CustomAdapater extends ListAdapter<LiftWidget, CustomAdapater.ViewHolder> {
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -29,6 +33,18 @@ public class CustomAdapater extends RecyclerView.Adapter<CustomAdapater.ViewHold
             rep_textView = (TextView) view.findViewById(R.id.reps);
         }
 
+        public void bind(String type, String weight, String rep) {
+            type_textView.setText(type);
+            weight_textView.setText(weight);
+            rep_textView.setText(rep);
+        }
+
+        static ViewHolder create(ViewGroup parent)
+        {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.lift_widget, parent, false);
+            return new ViewHolder(view);
+        }
         public TextView getType() {
             return type_textView;
         }
@@ -42,22 +58,15 @@ public class CustomAdapater extends RecyclerView.Adapter<CustomAdapater.ViewHold
         }
     }
 
-    public CustomAdapater(String [] ty, String [] wei, String [] rep)
-    {
-        type_array = ty;
-        weight_array = wei;
-        reps_array = rep;
+    public CustomAdapater(@NonNull DiffUtil.ItemCallback<LiftWidget> diffCallback) {
+        super(diffCallback);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
-    {
-        // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.lift_widget, viewGroup, false);
-
-        return new ViewHolder(view);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return ViewHolder.create(parent);
     }
+
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
@@ -65,16 +74,25 @@ public class CustomAdapater extends RecyclerView.Adapter<CustomAdapater.ViewHold
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getType().setText(type_array[position]);
-        viewHolder.getWeight().setText(weight_array[position]);
-        viewHolder.getReps().setText(reps_array[position]);
+        LiftWidget current = getItem(position);
+        viewHolder.bind(current.name, current.weight, current.reps);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return type_array.length;
+    public static class WordDiff extends DiffUtil.ItemCallback<LiftWidget> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull LiftWidget oldItem, @NonNull LiftWidget newItem) {
+            return oldItem == newItem;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull LiftWidget oldItem, @NonNull LiftWidget newItem) {
+            return oldItem.name.equals(newItem.name) && oldItem.reps.equals(newItem.reps)
+                    && oldItem.weight.equals(newItem.weight);
+        }
     }
+
 }
 
 

@@ -1,15 +1,29 @@
 package com.zybooks.myapplication.ui.lifts;
 
-public class LiftWidget {
-    public String name;
-    public String reps;
-    public String weight;
+import androidx.annotation.NonNull;
+import androidx.room.*;
 
-    LiftWidget(String n, String r, String w)
+@Entity(tableName = "liftTable")
+public class LiftWidget {
+    @PrimaryKey(autoGenerate = false)
+    @NonNull
+    public String name;
+
+    @NonNull
+    public String reps;
+
+    @NonNull
+    public String weight;
+    LiftWidget()
     {
-        name = n;
-        reps = r;
-        weight = w;
+
+    }
+
+    LiftWidget(String name, String reps, String weight)
+    {
+        this.name = name;
+        this.reps = reps;
+        this.weight = weight;
     }
 
 
