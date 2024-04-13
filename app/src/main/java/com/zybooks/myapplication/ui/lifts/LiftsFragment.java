@@ -67,7 +67,7 @@ public class LiftsFragment extends Fragment {
         String[] testPounds = {"10 Pounds", "100 Pounds"};
         String[] testReps = {"10 Reps", "100 Reps"};
 
-        CustomAdapater adapter = new CustomAdapater(new CustomAdapater.WordDiff());
+        CustomAdapater adapter = new CustomAdapater(new CustomAdapater.WordDiff(), this);
 
         dum.getAll().observe(getViewLifecycleOwner(), words ->
         {

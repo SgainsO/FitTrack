@@ -1,49 +1,72 @@
 package com.zybooks.myapplication.ui;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.myapplication.R;
+import com.zybooks.myapplication.ui.lifts.DatabaseToUiModel;
 import com.zybooks.myapplication.ui.lifts.LiftWidget;
 
 import java.util.List;
 
 public class CustomAdapater extends ListAdapter<LiftWidget, CustomAdapater.ViewHolder> {
 
-
+    private ViewModelStoreOwner mOwner;
+    private Context context;
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView type_textView;
         private final TextView weight_textView;
         private final TextView rep_textView;
-        public ViewHolder(View view) {
+        private ViewModelStoreOwner mOwn;
+
+        private DatabaseToUiModel dum;
+        private final Button removeButton;
+        public ViewHolder(View view, ViewModelStoreOwner mO) {
             super(view);
             // Define click listener for the ViewHolder's View
 
+            mOwn = mO;
+
+            dum = new ViewModelProvider(mO).get(DatabaseToUiModel.class);
+
+            removeButton = (Button) view.findViewById(R.id.EditButton);
             type_textView = (TextView) view.findViewById(R.id.workName);
             weight_textView = (TextView) view.findViewById(R.id.weight);
             rep_textView = (TextView) view.findViewById(R.id.reps);
+
         }
 
         public void bind(String type, String weight, String rep) {
             type_textView.setText(type);
             weight_textView.setText(weight);
             rep_textView.setText(rep);
+
+            removeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dum.delete(type);
+                }
+            });
         }
 
-        static ViewHolder create(ViewGroup parent)
+        static ViewHolder create(ViewGroup parent, ViewModelStoreOwner vm)
         {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.lift_widget, parent, false);
-            return new ViewHolder(view);
+            return new ViewHolder(view, vm);
         }
         public TextView getType() {
             return type_textView;
@@ -58,13 +81,17 @@ public class CustomAdapater extends ListAdapter<LiftWidget, CustomAdapater.ViewH
         }
     }
 
-    public CustomAdapater(@NonNull DiffUtil.ItemCallback<LiftWidget> diffCallback) {
+    public CustomAdapater(@NonNull DiffUtil.ItemCallback<LiftWidget> diffCallback, ViewModelStoreOwner vs) {
         super(diffCallback);
+        mOwner = vs;
+
     }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return ViewHolder.create(parent);
+        return ViewHolder.create(parent, mOwner);
     }
 
 

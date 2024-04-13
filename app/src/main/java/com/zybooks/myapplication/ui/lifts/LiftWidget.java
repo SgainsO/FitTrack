@@ -19,7 +19,7 @@ public class LiftWidget {
 
     }
 
-    LiftWidget(String name, String reps, String weight)
+    public LiftWidget(String name, String reps, String weight)
     {
         this.name = name;
         this.reps = reps;

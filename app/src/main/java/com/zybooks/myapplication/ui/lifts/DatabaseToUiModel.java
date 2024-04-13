@@ -30,4 +30,6 @@ public class DatabaseToUiModel extends AndroidViewModel
     {
         lr.delete(lw);
     }
+
+    public void delete(String name) {lr.deleteByName(name);}
 }
