@@ -2,11 +2,17 @@ package com.zybooks.myapplication.ui.lifts;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +34,18 @@ public class LiftsFragment extends Fragment {
     private FragmentLiftsBinding binding;
     RecyclerView recyclerView;
     private DatabaseToUiModel dum;
+    private Context mcon;
+
+    FloatingActionButton insertButton;
+
+
+
+    @Override
+    public void onAttach(Context con) {
+        super.onAttach(con);
+        mcon = con;
+    }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,13 +74,47 @@ public class LiftsFragment extends Fragment {
             adapter.submitList(words);
         });
 
-/*
-        FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener( view -> {
-            dum.insert(new LiftWidget("Test", "Test", "Test"));
+        insertButton = root.findViewById(R.id.insert);
+
+        insertButton.setOnClickListener( view -> {
+       //     dum.insert(new LiftWidget("Test", "Test", "Test"));
+            LayoutInflater inf = LayoutInflater.from(mcon);
+            View dialView = inf.inflate(R.layout.addnew, null);
+
+            EditText type = dialView.findViewById(R.id.typeinput);
+            EditText weight = dialView.findViewById(R.id.weightinput);
+            EditText rep = dialView.findViewById(R.id.repinput);
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(mcon);
+            builder.setView(dialView)
+                    .setTitle("Add Workout")
+                    .setPositiveButton("Add", new DialogInterface.OnClickListener()
+                    {
+
+                        @Override
+                        public void onClick(DialogInterface dia, int which)
+                        {
+                            String t = type.getText().toString();
+                            String w = weight.getText().toString();
+                            String r = rep.getText().toString();
+
+                            dum.insert(new LiftWidget(t, w, r));
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
+            {
+
+            };
         });
-*/
+
 
         recyclerView.setAdapter(adapter);
         return root;
