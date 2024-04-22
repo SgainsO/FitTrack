@@ -10,7 +10,7 @@ public class WeightViewModel extends ViewModel {
 
     public WeightViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is the weight fragment");
+        mText.setValue("");
     }
 
     public LiveData<String> getText() {
