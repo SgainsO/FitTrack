@@ -47,5 +47,4 @@
         android:layout_alignBottom="@id/EditButton"/>
 
 
-
 </RelativeLayout>
