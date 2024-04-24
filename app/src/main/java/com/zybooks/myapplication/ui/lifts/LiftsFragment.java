@@ -97,7 +97,7 @@ public class LiftsFragment extends Fragment {
                         public void onClick(DialogInterface dia, int which)
                         {
                             String t = type.getText().toString();
-                            String w = weight.getText().toString();
+                            String w = weight.getText().toString() + " Pounds";
                             String r = rep.getText().toString();
 
                             dum.insert(new LiftWidget(t, w, r));
