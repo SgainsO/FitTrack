@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -77,7 +78,7 @@ public class WeightFragment extends Fragment {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(mcon);
             builder.setView(dialView)
-                    .setTitle("Add Workout")
+                    .setTitle("Record Weight")
                     .setPositiveButton("Add", new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dia, int which){
@@ -108,9 +109,13 @@ public class WeightFragment extends Fragment {
                 double weight = Double.parseDouble(editWeight.getText().toString());
 
                 // Calculate BMI (BMI formula: weight (kg) / (height (m) * height (m)))
-                double bmi = (weight / (height * height)) * 10000;
+                double bmi = (weight / (height * height)) * 703;
 
                 // Display the result
+                String text = String.format("Your BMI: %.2f", bmi);
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(root.getContext(), text, duration);
+                toast.show();
             }
         });
 

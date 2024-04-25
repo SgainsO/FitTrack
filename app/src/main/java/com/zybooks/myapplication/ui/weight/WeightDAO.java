@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface WeightDAO
 {
-    @Query("SELECT * FROM weightTable")
+    @Query("SELECT * FROM weightTable ORDER BY date DESC")
     LiveData<List<WeightWidget>> getWeightData();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -45,6 +45,7 @@
         app:layout_constraintVertical_bias="0.019" />
 
     <Button
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
         android:id="@+id/add_weight_goal_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="Enter weight (lbs)"
+        android:hint="Enter weight (Ibs)"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.879"
@@ -116,10 +117,10 @@
 
     <EditText
         android:id="@+id/edit_height"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="143dp"
+        android:layout_height="48dp"
         android:layout_marginTop="276dp"
-        android:hint="Enter height (cm)"
+        android:hint="Enter height (in)"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.875"
