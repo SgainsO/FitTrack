@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -43,6 +44,8 @@ public class WeightFragment extends Fragment {
         WeightViewModel weightViewModel =
                 new ViewModelProvider(this).get(WeightViewModel.class);
         // Might need to change this //
+
+
 
         dum = new ViewModelProvider(this).get(W_DatabaseToUiModel.class);
 
@@ -91,6 +94,24 @@ public class WeightFragment extends Fragment {
                         }
                     })
                     .show();
+        });
+
+        // Calculate BMI logic
+        EditText editHeight = root.findViewById(R.id.edit_height);
+        EditText editWeight = root.findViewById(R.id.edit_weight);
+        Button btnCalculateBMI = root.findViewById(R.id.btn_calculate_bmi);
+
+        btnCalculateBMI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double height = Double.parseDouble(editHeight.getText().toString());
+                double weight = Double.parseDouble(editWeight.getText().toString());
+
+                // Calculate BMI (BMI formula: weight (kg) / (height (m) * height (m)))
+                double bmi = (weight / (height * height)) * 10000;
+
+                // Display the result
+            }
         });
 
         recyclerView.setAdapter(w_adapter);
