@@ -54,16 +54,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/recent_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/most_recent_weight"
-            android:textSize="30sp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp">
-        </TextView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/recent_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/recent_weight_value"
+                android:layout_toEndOf="@id/recent_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="@color/blue"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp">
+            </TextView>
+        </RelativeLayout>
+
 
         <View
             android:layout_width="match_parent"
@@ -72,6 +89,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recent_weight"/>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/latest_lift"
             android:layout_width="wrap_content"
@@ -79,9 +99,21 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"
-            android:text="@string/latest_lift_increased"
-            android:textSize="30sp">
+            android:textSize="25sp">
         </TextView>
+
+        <TextView
+            android:id="@+id/latest_lift_value"
+            android:layout_toEndOf="@id/latest_lift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="@color/blue"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp">
+        </TextView>
+    </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -90,6 +122,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/latest_lift"/>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/progress_weight"
             android:layout_width="wrap_content"
@@ -97,9 +132,21 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"
-            android:text="@string/progress_to_goal_weight"
-            android:textSize="30sp">
+            android:textSize="25sp">
         </TextView>
+
+        <TextView
+            android:id="@+id/progress_weight_value"
+            android:layout_toEndOf="@id/progress_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="@color/blue"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp">
+        </TextView>
+    </RelativeLayout>
 
         <View
             android:layout_width="match_parent"

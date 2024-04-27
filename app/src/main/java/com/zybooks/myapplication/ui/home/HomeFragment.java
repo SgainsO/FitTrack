@@ -34,6 +34,15 @@ public class HomeFragment extends Fragment {
         final TextView progressText = binding.progress;
         homeViewModel.progressGetText().observe(getViewLifecycleOwner(), progressText::setText);
 
+        final TextView recentWeightText = binding.recentWeight;
+        homeViewModel.recWeightGetText().observe(getViewLifecycleOwner(), recentWeightText::setText);
+
+        final TextView latestLiftText = binding.latestLift;
+        homeViewModel.latLiftGetText().observe(getViewLifecycleOwner(), latestLiftText::setText);
+
+        final TextView progressWeightText = binding.progressWeight;
+        homeViewModel.progWeightGetText().observe(getViewLifecycleOwner(), progressWeightText::setText);
+
         return root;
     }
 
