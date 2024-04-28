@@ -67,7 +67,7 @@ public class WeightFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
 
-        final TextView textView = binding.textWeight;
+        final TextView textView = binding.currentWeightGoal;
         weightViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         WeightAdapter w_adapter = new WeightAdapter(new WeightAdapter.WordDiff());
@@ -124,17 +124,22 @@ public class WeightFragment extends Fragment {
         btnCalculateBMI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double height = Double.parseDouble(editHeight.getText().toString());
-                double weight = Double.parseDouble(editWeight.getText().toString());
+                if (editHeight.getText().toString().isEmpty() || editWeight.getText().toString().isEmpty()) {
 
-                // Calculate BMI (BMI formula: weight (kg) / (height (m) * height (m)))
-                double bmi = (weight / (height * height)) * 703;
+                }
+                else {
+                    double height = Double.parseDouble(editHeight.getText().toString());
+                    double weight = Double.parseDouble(editWeight.getText().toString());
 
-                // Display the result
-                String text = String.format("Your BMI: %.2f", bmi);
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(root.getContext(), text, duration);
-                toast.show();
+                    // Calculate BMI (BMI formula: weight (kg) / (height (m) * height (m)))
+                    double bmi = (weight / (height * height)) * 703;
+
+                    // Display the result
+                    String text = String.format("Your BMI: %.2f", bmi);
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(root.getContext(), text, duration);
+                    toast.show();
+                }
             }
         });
 

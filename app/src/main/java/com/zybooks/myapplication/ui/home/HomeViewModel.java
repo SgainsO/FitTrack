@@ -1,9 +1,16 @@
 package com.zybooks.myapplication.ui.home;
 
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+
 import com.zybooks.myapplication.ui.weight.*;
+import com.zybooks.myapplication.ui.lifts.*;
+
+import java.util.List;
 
 public class HomeViewModel extends ViewModel {
 
@@ -18,6 +25,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<String> mProgWeightValue;
 
     public HomeViewModel() {
+
         mWelcome = new MutableLiveData<>();
         mWelcome.setValue("Welcome back!");
 
@@ -34,13 +42,13 @@ public class HomeViewModel extends ViewModel {
         mProgWeight.setValue("Progress to Goal Weight:");
 
         mRecWeightValue = new MutableLiveData<>();
-        mRecWeightValue.setValue("lbs");
+        mRecWeightValue.setValue("");
 
         mLatLiftValue = new MutableLiveData<>();
         mLatLiftValue.setValue("");
 
         mProgWeightValue = new MutableLiveData<>();
-        mProgWeightValue.setValue("%");
+        mProgWeightValue.setValue("");
     }
 
     public LiveData<String> welcomeGetText() {
@@ -57,5 +65,15 @@ public class HomeViewModel extends ViewModel {
     }
     public LiveData<String> progWeightGetText() {
         return mProgWeight;
+    }
+
+    public LiveData<String> recWeightValueGetText() {
+        return mRecWeightValue;
+    }
+    public LiveData<String> latLiftValueGetText() {
+        return mLatLiftValue;
+    }
+    public LiveData<String> progWeightValueGetText() {
+        return mProgWeightValue;
     }
 }

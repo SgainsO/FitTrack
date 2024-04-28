@@ -1,20 +1,14 @@
 package com.zybooks.myapplication.ui.lifts;
 
-import static android.app.Activity.RESULT_OK;
-
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,10 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.zybooks.myapplication.MainActivity;
 import com.zybooks.myapplication.R;
 import com.zybooks.myapplication.databinding.FragmentLiftsBinding;
-import com.zybooks.myapplication.ui.CustomAdapater;
+import com.zybooks.myapplication.ui.CustomAdapter;
 
 public class LiftsFragment extends Fragment {
 
@@ -54,7 +47,6 @@ public class LiftsFragment extends Fragment {
 
         dum = new ViewModelProvider(this).get(DatabaseToUiModel.class);
 
-
         binding = FragmentLiftsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         recyclerView = root.findViewById(R.id.recycler_view);
@@ -63,17 +55,12 @@ public class LiftsFragment extends Fragment {
         final TextView textView = binding.textLifts;
         liftsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        String[] testType = {"Bicep Curls", "Tricep Curls"};
-        String[] testPounds = {"10 Pounds", "100 Pounds"};
-        String[] testReps = {"10 Reps", "100 Reps"};
-
-        CustomAdapater adapter = new CustomAdapater(new CustomAdapater.WordDiff());
+        CustomAdapter adapter = new CustomAdapter(new CustomAdapter.WordDiff());
 
         dum.getAll().observe(getViewLifecycleOwner(), words ->
         {
             adapter.submitList(words);
         });
-
 
         insertButton = root.findViewById(R.id.insert);
 

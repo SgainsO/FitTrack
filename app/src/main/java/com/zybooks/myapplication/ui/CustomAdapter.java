@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.zybooks.myapplication.R;
 import com.zybooks.myapplication.ui.lifts.LiftWidget;
 
-import java.util.List;
-
-public class CustomAdapater extends ListAdapter<LiftWidget, CustomAdapater.ViewHolder> {
+public class CustomAdapter extends ListAdapter<LiftWidget, CustomAdapter.ViewHolder> {
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -58,7 +55,7 @@ public class CustomAdapater extends ListAdapter<LiftWidget, CustomAdapater.ViewH
         }
     }
 
-    public CustomAdapater(@NonNull DiffUtil.ItemCallback<LiftWidget> diffCallback) {
+    public CustomAdapter(@NonNull DiffUtil.ItemCallback<LiftWidget> diffCallback) {
         super(diffCallback);
     }
 

@@ -11,13 +11,13 @@ public class WeightRepository {
     private WeightDAO sqlHandler;
     private LiveData<List<WeightWidget>> widgets;
 
-    WeightRepository(Application application) {
+    public WeightRepository(Application application) {
         WeightDatabase db = WeightDatabase.getDatabase(application);
         sqlHandler = db.weightdao();
         widgets = sqlHandler.getWeightData();
     }
 
-    LiveData<List<WeightWidget>> getAllWidgets() {
+    public LiveData<List<WeightWidget>> getAllWidgets() {
         return widgets;
     }
 

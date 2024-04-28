@@ -21,4 +21,8 @@ public class WeightWidget {
         this.weight = weight;
     }
 
+    public String getWeight() {
+        return weight;
+    }
+
 }

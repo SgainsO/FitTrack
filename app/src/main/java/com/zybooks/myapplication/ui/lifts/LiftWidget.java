@@ -26,5 +26,8 @@ public class LiftWidget {
         this.weight = weight;
     }
 
+    public String getName() {
+        return name;
+    }
 
 }

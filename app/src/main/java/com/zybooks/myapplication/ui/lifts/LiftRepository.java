@@ -10,13 +10,13 @@ public class LiftRepository {
     private LiftsDAO sqlHandler;
     private LiveData<List<LiftWidget>> widgets;
 
-    LiftRepository(Application application) {
+    public LiftRepository(Application application) {
         LiftDatabase db = LiftDatabase.getDatabase(application);
         sqlHandler = db.liftdao();
         widgets = sqlHandler.getLiftData();
     }
 
-    LiveData<List<LiftWidget>> getAllWidgets() {
+    public LiveData<List<LiftWidget>> getAllWidgets() {
         return widgets;
     }
 

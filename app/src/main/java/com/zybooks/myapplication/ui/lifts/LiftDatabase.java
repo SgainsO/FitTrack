@@ -49,8 +49,8 @@ public abstract class LiftDatabase extends RoomDatabase
                 // If you want to start with more words, just add them.
                 LiftsDAO dao = INSTANCE.liftdao();
 
-                LiftWidget lw = new LiftWidget("Tricep Curls", "5 pounds", "10 pounds");
-                dao.updateLiftTable(lw);
+                //LiftWidget lw = new LiftWidget("Tricep Curls", "5 reps", "10 pounds");
+                //dao.updateLiftTable(lw);
             });
         }
     };
