@@ -39,6 +39,7 @@
             android:singleLine="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/input_weight"
+            android:inputType="number"
             android:width="50dp"
             android:layout_weight="1"
             />
