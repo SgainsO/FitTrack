@@ -6,4 +6,5 @@
     <string name="most_recent_weight">Most Recent Weight:</string>
     <string name="latest_lift_increased">Latest Lift Increased:</string>
     <string name="progress_to_goal_weight">Progress to Goal Weight:</string>
+    <string name="logged_weight">Logged Weight</string>
 </resources>
