@@ -35,15 +35,19 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/workName"
         android:layout_alignBottom="@id/EditButton"/>
+
     <TextView
         android:id="@+id/weight"
         android:layout_width="80dp"
-        android:textSize="20sp"
         android:layout_height="65dp"
-        android:textAlignment="center"
-        android:text="5 pounds"
-        android:layout_toLeftOf="@id/reps"
         android:layout_alignTop="@+id/workName"
-        android:layout_alignBottom="@id/EditButton"/>
+        android:layout_alignBottom="@id/EditButton"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toLeftOf="@id/reps"
+        android:text="5 pounds"
+        android:textAlignment="center"
+        android:textSize="20sp" />
 
 </RelativeLayout>

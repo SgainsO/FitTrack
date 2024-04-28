@@ -49,18 +49,33 @@ public class CustomAdapter extends ListAdapter<LiftWidget, CustomAdapter.ViewHol
 
         }
 
+        public ViewHolder(View view) {
+            super(view);
+            // Define click listener for the ViewHolder's View
+
+            removeButton = (Button) view.findViewById(R.id.EditButton);
+            type_textView = (TextView) view.findViewById(R.id.workName);
+            weight_textView = (TextView) view.findViewById(R.id.weight);
+            rep_textView = (TextView) view.findViewById(R.id.reps);
+
+        }
+
+
         public void bind(String type, String weight, String rep) {
             type_textView.setText(type);
             weight_textView.setText(weight);
             rep_textView.setText(rep);
 
-            removeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dum.delete(type);
-                }
-            });
+            if(dum != null) {
+                removeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dum.delete(type);
+                    }
+                });
+            }
         }
+
 
 
         static ViewHolder create(ViewGroup parent, ViewModelStoreOwner vm)
@@ -68,6 +83,13 @@ public class CustomAdapter extends ListAdapter<LiftWidget, CustomAdapter.ViewHol
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.lift_widget, parent, false);
             return new ViewHolder(view, vm);
+        }
+
+        static ViewHolder create(ViewGroup parent)
+        {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.lift_widget, parent, false);
+            return new ViewHolder(view);
         }
         public TextView getType() {
             return type_textView;
@@ -88,10 +110,19 @@ public class CustomAdapter extends ListAdapter<LiftWidget, CustomAdapter.ViewHol
 
     }
 
+    public CustomAdapter(@NonNull DiffUtil.ItemCallback<LiftWidget> diffCallback) {
+        super(diffCallback);
+        mOwner = null;
+    }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return ViewHolder.create(parent, mOwner);
+        if(mOwner != null) {
+            return ViewHolder.create(parent, mOwner);
+        }else{
+            return ViewHolder.create(parent);
+        }
     }
 
 

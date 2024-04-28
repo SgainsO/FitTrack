@@ -85,7 +85,7 @@ public class LiftsFragment extends Fragment {
                         {
                             String t = type.getText().toString();
                             String w = weight.getText().toString() + " Pounds";
-                            String r = rep.getText().toString() + " Reps";
+                            String r = rep.getText().toString() +  "\n"+ "Reps";
 
                             dum.insert(new LiftWidget(t, w, r));
                         }
