@@ -12,7 +12,11 @@ public interface LiftsDAO
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void updateLiftTable(LiftWidget liftWidget);
 
-    @Delete
+    @Delete()
     void DeleteLift(LiftWidget liftWidget);
+
+    @Query("DELETE FROM lifttable WHERE name = :liftId")
+    void deleteLiftByName(String liftId);
+
 
 }

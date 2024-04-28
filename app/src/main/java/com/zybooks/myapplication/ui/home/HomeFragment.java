@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
 
         data = new ViewModelProvider(this).get(HomeDatabaseToUiModel.class);
 
-        CustomAdapter cadapter = new CustomAdapter(new CustomAdapter.WordDiff());
+        CustomAdapter cadapter = new CustomAdapter(new CustomAdapter.WordDiff(), this);
         WeightAdapter wadapter = new WeightAdapter(new WeightAdapter.WordDiff());
 
         data.getAllLifts().observe(getViewLifecycleOwner(), words ->

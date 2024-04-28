@@ -55,7 +55,7 @@ public class LiftsFragment extends Fragment {
         final TextView textView = binding.textLifts;
         liftsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        CustomAdapter adapter = new CustomAdapter(new CustomAdapter.WordDiff());
+        CustomAdapter adapter = new CustomAdapter(new CustomAdapter.WordDiff(), this);;
 
         dum.getAll().observe(getViewLifecycleOwner(), words ->
         {

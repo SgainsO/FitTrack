@@ -12,7 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Type:" />
+            android:text="Name:" />
 
         <EditText
             android:layout_height="wrap_content"
@@ -23,7 +23,6 @@
             />
     </TableRow>
 
-    <!-- Second Row -->
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -40,11 +39,16 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/weightinput"
             android:width="50dp"
-            android:layout_weight="1"
+            android:layout_weight=".8"
+            android:inputType="number"
+            android:gravity="top"
             />
+
+        <TextView
+            android:gravity="center"
+            android:text="lbs" />
     </TableRow>
 
-    <!-- Third Row -->
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -53,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Reps" />
+            android:text="Reps:" />
 
         <EditText
             android:layout_centerHorizontal="true"
@@ -61,10 +65,10 @@
             android:singleLine="true"
             android:id="@+id/repinput"
             android:layout_weight="1"
+            android:inputType="number"
             />
     </TableRow>
 
-    <!-- Fourth Row -->
 
 
 </TableLayout>

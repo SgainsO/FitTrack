@@ -8,10 +8,8 @@ public class LiftWidget {
     @PrimaryKey(autoGenerate = false)
     @NonNull
     public String name;
-
     @NonNull
     public String reps;
-
     @NonNull
     public String weight;
     LiftWidget()
@@ -19,15 +17,10 @@ public class LiftWidget {
 
     }
 
-    LiftWidget(String name, String reps, String weight)
+    public LiftWidget(String name, String reps, String weight)
     {
         this.name = name;
         this.reps = reps;
         this.weight = weight;
     }
-
-    public String getName() {
-        return name;
-    }
-
 }

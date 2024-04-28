@@ -32,4 +32,11 @@ public class LiftRepository {
         });
     }
 
+    void deleteByName(String name)
+    {
+        LiftDatabase.databaseWriteExecutor.execute(() -> {
+            sqlHandler.deleteLiftByName(name);
+        });
+    }
+
 }
