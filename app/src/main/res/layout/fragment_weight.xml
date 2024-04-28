@@ -34,7 +34,7 @@
         android:id="@+id/current_weight_goal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="150 lbs"
+        android:text=""
         android:textSize="30sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

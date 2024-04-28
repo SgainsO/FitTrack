@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,20 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zybooks.myapplication.databinding.FragmentWeightBinding;
 import com.zybooks.myapplication.ui.WeightAdapter;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class WeightFragment extends Fragment {
 
     RecyclerView recyclerView;
     private W_DatabaseToUiModel dum;
     private Context mcon;
+
+    private TextView goalTextView;
+    private EditText goalEditText;
 
     FloatingActionButton insertButton;
 
@@ -66,6 +76,15 @@ public class WeightFragment extends Fragment {
         {
             w_adapter.submitList(words);
         });
+        goalTextView = root.findViewById(R.id.current_weight_goal);
+
+        root.findViewById(R.id.add_weight_goal_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                showAddGoalDialog();
+            }
+        });
+        displayLatestGoal();
 
         insertButton = root.findViewById(R.id.insert_butt);
 
@@ -121,6 +140,58 @@ public class WeightFragment extends Fragment {
 
         recyclerView.setAdapter(w_adapter);
         return root;
+    }
+
+    private void showAddGoalDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        View dialogView = getLayoutInflater().inflate(R.layout.addnewgoal, null);
+        EditText goalEditText = dialogView.findViewById(R.id.input_goal);
+        builder.setView(dialogView);
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String goalString = goalEditText.getText().toString();
+                if (!TextUtils.isEmpty(goalString)) {
+                    double goal = Double.parseDouble(goalString);
+                    saveGoalToFile(goal);
+                    displayLatestGoal();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.create().show();
+    }
+
+    private void saveGoalToFile(double goal) {
+        Context context = getContext();
+        if (context != null){
+            try {
+                FileOutputStream fos = context.openFileOutput("goals.txt", Context.MODE_PRIVATE);
+                fos.write(String.valueOf(goal).getBytes());
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private void displayLatestGoal() {
+
+        try {
+            FileInputStream fis = requireActivity().openFileInput("goals.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((line = br.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            br.close();
+            goalTextView.setText(stringBuilder.toString() + " lbs");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
