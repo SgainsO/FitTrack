@@ -11,15 +11,19 @@ public class W_DatabaseToUiModel extends AndroidViewModel
 {
     private WeightRepository wr;
     private final LiveData<List<WeightWidget>> allWes;
+    private final LiveData<List<WeightWidget>> latestWeight;
 
     public W_DatabaseToUiModel(Application application)
     {
         super(application);
         wr = new WeightRepository(application);
         allWes = wr.getAllWidgets();
+        latestWeight = wr.getLatestData();
     }
 
     public LiveData<List<WeightWidget>> getAll() {return allWes;}
+
+    public LiveData<List<WeightWidget>> getLatestWeight() {return latestWeight;}
 
     public void insert(WeightWidget lw)
     {

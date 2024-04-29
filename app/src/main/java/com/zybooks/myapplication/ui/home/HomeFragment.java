@@ -8,24 +8,25 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.zybooks.myapplication.R;
 import com.zybooks.myapplication.databinding.FragmentHomeBinding;
-import com.zybooks.myapplication.ui.CustomAdapter;
-import com.zybooks.myapplication.ui.HomeAdapter;
-import com.zybooks.myapplication.ui.WeightAdapter;
+import com.zybooks.myapplication.ui.lifts.DatabaseToUiModel;
+import com.zybooks.myapplication.ui.lifts.LiftWidget;
+import com.zybooks.myapplication.ui.weight.W_DatabaseToUiModel;
+import com.zybooks.myapplication.ui.weight.WeightWidget;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
-
-    private HomeDatabaseToUiModel data;
+    private DatabaseToUiModel lData;
+    private W_DatabaseToUiModel wData;
     private FragmentHomeBinding binding;
-
-    private RecyclerView recycleLift;
-    private RecyclerView recycleWeight;
-    private RecyclerView recycleProgress;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,28 +35,52 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        recycleLift = root.findViewById(R.id.latest_lift_value);
-        recycleLift.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        recycleWeight = root.findViewById(R.id.recent_weight_value);
-        recycleWeight.setLayoutManager(new LinearLayoutManager(requireContext()));
+        lData = new ViewModelProvider(this).get(DatabaseToUiModel.class);
+        wData = new ViewModelProvider(this).get(W_DatabaseToUiModel.class);
 
-        recycleProgress = root.findViewById(R.id.progress_weight_value);
-        recycleProgress.setLayoutManager(new LinearLayoutManager(requireContext()));
-
-        data = new ViewModelProvider(this).get(HomeDatabaseToUiModel.class);
-
-        CustomAdapter cadapter = new CustomAdapter(new CustomAdapter.WordDiff());
-        WeightAdapter wadapter = new WeightAdapter(new WeightAdapter.WordDiff());
-
-        data.getAllLifts().observe(getViewLifecycleOwner(), words ->
-        {
-            cadapter.submitList(words);
+        TextView recentWeightValue = binding.recentWeightValue;
+        wData.getLatestWeight().observe(getViewLifecycleOwner(), new Observer<List<WeightWidget>>() {
+            @Override
+            public void onChanged(List<WeightWidget> weightWidgets) {
+                if(weightWidgets.size() != 0) {
+                    recentWeightValue.setText(weightWidgets.get(0).getWeight());
+                }
+            }
         });
 
-        data.getAllWeights().observe(getViewLifecycleOwner(), words ->
-        {
-            wadapter.submitList(words);
+        TextView latestLiftValue = binding.latestLiftValue;
+        lData.getLatestLift().observe(getViewLifecycleOwner(), new Observer<List<LiftWidget>>() {
+            @Override
+            public void onChanged(List<LiftWidget> liftWidgets) {
+                if(liftWidgets.size() != 0) {
+                    latestLiftValue.setText(liftWidgets.get(0).getName());
+                }
+            }
+        });
+
+        TextView progressWeightValue = binding.progressWeightValue;
+        wData.getLatestWeight().observe(getViewLifecycleOwner(), new Observer<List<WeightWidget>>() {
+            @Override
+            public void onChanged(List<WeightWidget> weightWidgets) {
+                if(weightWidgets.size() != 0) {
+                    String curWeight = weightWidgets.get(0).getWeight();
+                    String realWeight = "";
+                    for(int i = 0; i < curWeight.length(); i++) {
+                        char s = curWeight.charAt(i);
+                        if (Character.isDigit(s)) {
+                            realWeight += s;
+                        }
+                    }
+
+                    double currentWeight = Double.parseDouble(realWeight);
+                    double goalWeight = getLatestGoal();
+                    double difference = Math.abs(goalWeight - currentWeight);
+
+                    String progress = Double.toString(difference) + " lbs to go!";
+                    progressWeightValue.setText(progress);
+                }
+            }
         });
 
         final TextView welcomeText = binding.welcome;
@@ -73,19 +98,26 @@ public class HomeFragment extends Fragment {
         final TextView progressWeightText = binding.progressWeight;
         homeViewModel.progWeightGetText().observe(getViewLifecycleOwner(), progressWeightText::setText);
 
-        //TextView latestLiftValue = binding.latestLiftValue;
-        //homeViewModel.latLiftValueGetText().observe(getViewLifecycleOwner(), latestLiftValue::setText);
-
-        //TextView recentWeightValue = binding.recentWeightValue;
-        //homeViewModel.recWeightValueGetText().observe(getViewLifecycleOwner(), recentWeightValue::setText);
-
-        //TextView progressWeightValue = binding.progressWeightValue;
-        //homeViewModel.progWeightValueGetText().observe(getViewLifecycleOwner(), progressWeightValue::setText);
-
-        recycleLift.setAdapter(cadapter);
-        recycleWeight.setAdapter(wadapter);
-        recycleProgress.setAdapter(wadapter);
         return root;
+    }
+
+    private double getLatestGoal() {
+        double goalWeight = 0;
+        try {
+            FileInputStream fis = requireActivity().openFileInput("goals.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((line = br.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            br.close();
+            goalWeight = Double.parseDouble(stringBuilder.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return goalWeight;
     }
 
     @Override

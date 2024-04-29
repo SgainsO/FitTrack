@@ -102,6 +102,7 @@ public class WeightFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dia, int which){
                             String w = weight.getText().toString();
+                            w += " lbs";
                             String d = date.getText().toString();
 
                             dum.insert(new WeightWidget(d, w));
@@ -178,7 +179,6 @@ public class WeightFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-
     }
 
     private void displayLatestGoal() {

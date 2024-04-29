@@ -57,7 +57,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <TextView
                 android:id="@+id/recent_weight"
                 android:layout_width="wrap_content"
@@ -68,16 +67,17 @@
                 android:layout_marginBottom="25dp">
             </TextView>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <TextView
                 android:id="@+id/recent_weight_value"
-                android:layout_toEndOf="@id/recent_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/recent_weight"
                 android:textSize="25sp"
                 android:textColor="@color/blue"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="25dp">
+            </TextView>
         </RelativeLayout>
 
 
@@ -91,26 +91,28 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/latest_lift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
-            android:textSize="25sp">
-        </TextView>
+            <TextView
+                android:id="@+id/latest_lift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:textSize="25sp">
+            </TextView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/latest_lift_value"
-            android:layout_toEndOf="@id/latest_lift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/blue"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/latest_lift_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/latest_lift"
+                android:textColor="@color/blue"
+                android:textSize="25sp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp">
+            </TextView>
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -122,27 +124,28 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/progress_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
-            android:textSize="25sp">
-        </TextView>
+            <TextView
+                android:id="@+id/progress_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:textSize="25sp">
+            </TextView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/progress_weight_value"
-            android:layout_toEndOf="@id/progress_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:textColor="@color/blue"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/progress_weight_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/progress_weight"
+                android:textSize="25sp"
+                android:textColor="@color/blue"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp">
+            </TextView>
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -151,6 +154,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progress_weight"/>
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

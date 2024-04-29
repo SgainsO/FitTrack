@@ -17,6 +17,9 @@ public interface WeightDAO
     @Query("SELECT * FROM weightTable ORDER BY date DESC")
     LiveData<List<WeightWidget>> getWeightData();
 
+    @Query("SELECT * FROM weightTable ORDER BY date DESC LIMIT 1")
+    LiveData<List<WeightWidget>> getLatestData();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void updateWeightTable(WeightWidget weightWidget);
 

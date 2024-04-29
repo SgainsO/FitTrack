@@ -9,15 +9,22 @@ import java.util.List;
 public class LiftRepository {
     private LiftsDAO sqlHandler;
     private LiveData<List<LiftWidget>> widgets;
+    private LiveData<List<LiftWidget>> latestLift;
+
 
     public LiftRepository(Application application) {
         LiftDatabase db = LiftDatabase.getDatabase(application);
         sqlHandler = db.liftdao();
         widgets = sqlHandler.getLiftData();
+        latestLift = sqlHandler.getLatestData();
     }
 
     public LiveData<List<LiftWidget>> getAllWidgets() {
         return widgets;
+    }
+
+    public LiveData<List<LiftWidget>> getLatestData() {
+        return latestLift;
     }
 
     void insert(LiftWidget lw) {

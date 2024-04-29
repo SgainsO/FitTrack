@@ -9,6 +9,9 @@ public interface LiftsDAO
     @Query("SELECT * FROM lifttable ORDER BY name ASC")
     LiveData<List<LiftWidget>> getLiftData();
 
+    @Query("SELECT * FROM lifttable ORDER BY name DESC LIMIT 1")
+    LiveData<List<LiftWidget>> getLatestData();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void updateLiftTable(LiftWidget liftWidget);
 
