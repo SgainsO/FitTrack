@@ -50,6 +50,12 @@ public class WeightFragment extends Fragment {
         mcon = con;
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        displayLatestGoal();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         WeightViewModel weightViewModel =
