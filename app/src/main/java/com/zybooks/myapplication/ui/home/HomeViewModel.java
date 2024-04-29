@@ -36,7 +36,7 @@ public class HomeViewModel extends ViewModel {
         mRecWeight.setValue("Most Recent Weight:");
 
         mLatLift = new MutableLiveData<>();
-        mLatLift.setValue("Latest Lift Increased:");
+        mLatLift.setValue("Latest Lift Added:");
 
         mProgWeight = new MutableLiveData<>();
         mProgWeight.setValue("Progress to Goal Weight:");
