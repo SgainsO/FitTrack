@@ -19,6 +19,7 @@
             android:layout_weight="1"
             android:singleLine='true'
             android:id="@+id/input_date"
+            android:inputType="date"
             android:width="50dp"
             />
     </TableRow>
