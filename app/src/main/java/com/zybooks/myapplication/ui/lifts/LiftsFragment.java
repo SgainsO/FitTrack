@@ -83,10 +83,11 @@ public class LiftsFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dia, int which)
                         {
+                            //On Button Click, add Workout Type, Weight, and Reps
                             String t = type.getText().toString();
                             String w = weight.getText().toString() + " Pounds";
                             String r = rep.getText().toString() +  "\n"+ "Reps";
-
+                            // Insert into DB
                             dum.insert(new LiftWidget(t, w, r));
                         }
                     })

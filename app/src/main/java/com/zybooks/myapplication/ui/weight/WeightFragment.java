@@ -108,10 +108,25 @@ public class WeightFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dia, int which){
                             String w = weight.getText().toString();
-                            w += " lbs";
+
                             String d = date.getText().toString();
 
-                            dum.insert(new WeightWidget(d, w));
+                            if (d.length() > 10){
+                                String text = String.format("Date is not valid, input in mm/dd/yyyy form");
+                                int duration = Toast.LENGTH_SHORT;
+                                Toast toast = Toast.makeText(root.getContext(), text, duration);
+                                toast.show();
+                            }
+                            else if (w.length() > 4){
+                                String text = String.format("Weight is above maximum limit (>9999 lbs)");
+                                int duration = Toast.LENGTH_SHORT;
+                                Toast toast = Toast.makeText(root.getContext(), text, duration);
+                                toast.show();
+                            }
+                            else{
+                                w += " lbs";
+                                dum.insert(new WeightWidget(d, w));
+                            }
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
